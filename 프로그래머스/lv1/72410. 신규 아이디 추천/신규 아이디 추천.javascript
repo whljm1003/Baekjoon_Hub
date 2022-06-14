@@ -1,19 +1,22 @@
 function solution(new_id) {
-    let result = new_id
-        .toLowerCase()
-        .replace(/[^\w-\_\.]/g, '')
-        .replace(/[\.]{2,}/g, '.')
-        .replace(/^\.|\.$/g, '')
-    if (!result){
-        result = 'a'
+    var answer = new_id;
+    
+    answer = answer.toLowerCase();
+    answer = answer.replace(/[^a-z0-9-_.]/gm, "");
+    answer = answer.replace(/\.{2,}/gm, ".");
+    answer = answer.replace(/(^\.|\.$)/gm, "");
+    // answer = answer.replace(/([^a-z0-9-_.]|(^\.|\.$))/gm, "");
+    answer = answer.slice(0,15);
+      answer = answer.replace(/(^\.|\.$)/gm, "");
+ 
+    if(answer.length === 0) {
+        answer = "aaa";
     }
-    if (result.length >= 16){
-        result = result.slice(0,15).replace(/\.$/, '');
+    while(answer.length < 3) {
+        answer += answer[answer.length-1];    
     }
-    if (result.length <= 2){
-        while(result.length <= 2){
-            result = result + result[result.length -1];
-        }
-    }
-    return result;
+        
+
+    
+    return answer;
 }
