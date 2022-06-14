@@ -1,22 +1,14 @@
 function solution(new_id) {
-    var answer = new_id;
-    
-    answer = answer.toLowerCase();
-    answer = answer.replace(/[^a-z0-9-_.]/gm, "");
-    answer = answer.replace(/\.{2,}/gm, ".");
-    answer = answer.replace(/(^\.|\.$)/gm, "");
-    // answer = answer.replace(/([^a-z0-9-_.]|(^\.|\.$))/gm, "");
-    answer = answer.slice(0,15);
-      answer = answer.replace(/(^\.|\.$)/gm, "");
- 
-    if(answer.length === 0) {
-        answer = "aaa";
-    }
+    var answer = new_id
+    .toLowerCase()
+    .replace(/[^\w-_.]/gm, "")
+    .replace(/\.{2,}/gm, ".")
+    .replace(/(^\.|\.$)/gm, "")
+    .replace(/^$/, 'a') // 5
+    .slice(0, 15).replace(/\.$/, ''); // 6
+
     while(answer.length < 3) {
         answer += answer[answer.length-1];    
     }
-        
-
-    
     return answer;
 }
