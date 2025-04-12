@@ -1,11 +1,10 @@
 function solution(s) {
-  let answer = '';  
-  const arr = s.split(' ');
-
-for(let i = 0 ; i < arr.length ; i++) {
-  const target = arr[i].toLowerCase();
-  const firstWord = target.substring(0,1).toUpperCase();
-  answer += ` ${firstWord + target.substring(1)}`
-}
-  return answer.substring(1);
+    let arr = s.split(' ')
+  
+    const result = arr.map(word => {
+      if (word.length === 0) return ''; 
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }).join(' ');
+    
+    return result
 }
