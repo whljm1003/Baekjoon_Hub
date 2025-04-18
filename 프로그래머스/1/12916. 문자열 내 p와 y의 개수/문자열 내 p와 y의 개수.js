@@ -1,7 +1,16 @@
 function solution(s){
-    function count(target) {
-        return s.toLowerCase().split('').filter(e => e === target).length;
-    }
+    let p = 0;
+    let y = 0;
     
-    return Boolean(count("p") === count("y"));
+    for(let i = 0 ; i <s.length ; i ++) {
+      const target = s.toLowerCase();      
+    
+        if(target[i] === "p") {
+            p++;
+        }else if(target[i] === "y") {
+            y++;
+        }
+    }
+      
+    return p === y;
 }
