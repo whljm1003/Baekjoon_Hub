@@ -1,19 +1,16 @@
-// 괄호 (스택 문제)
 function solution(s){
-  const stack = []
+    let stack = []
 
-  for(let i = 0 ; i< s.length ; i++) {
-    const target = s[i];
-    
-    if(target === ")") {
-      if(stack.length === 0) return false;
-      stack.pop();
-    } else if(target === "(") {
-      stack.push(target);
+    for(let i = 0 ; i < s.length ; i++) {  
+      if(s[i] === "(") {
+          stack.push("(")
+      }else {
+          if(stack.length === 0) {
+              return false;
+          }
+        stack.pop();
+      } 
     }
-
-    }
     
-  return Boolean(stack.length === 0);
+    return stack.length === 0;
 }
-
