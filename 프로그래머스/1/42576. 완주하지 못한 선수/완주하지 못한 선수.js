@@ -1,19 +1,26 @@
 function solution(participant, completion) {
-    const map = new Map();
+    let answer = '';
+    const result = new Map();
     
     // 참여자
-    for(const name of participant) {
-        const count = map.get(name) || 0;
-        map.set(name,count + 1);
+    for(let i = 0 ; i < participant.length ; i++) {
+        const target = participant[i];
+        result.set(target, result.get(target) + 1 || 1);
     }
     
     // 완주자
-    for(const name of completion) {
-      map.set(name, map.get(name) - 1);
+    for( let i = 0 ; i < completion.length ; i++) {
+        const target = completion[i];
+        if(result.get(target)) {
+            result.set(target, result.get(target) - 1);
+        }
     }
-  
+        
     // 결과
-    for(const [name, count] of map.entries()) {
-      if(count > 0) return name;
-    }
+    result.forEach((value, key) => {
+      if(value === 1) answer = key;
+    })
+
+
+    return answer;
 }
