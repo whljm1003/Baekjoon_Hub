@@ -1,25 +1,19 @@
 function solution(n, words) {
-  const  answer = [0, 0];
-  const countMap = new Map();
-  let preWord = "";
+  const usedWords = new Set();
+  let prevWord = "";
 
-  for (const [index, word] of words.entries()) {
-    const target = (index + 1) % n;
-    const order = target === 0 ? n : target;
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    const player = (i % n) + 1;
+    const turn = Math.floor(i / n) + 1;
 
-      if(preWord.length > 0 && preWord.at(-1) !== word.at(0)) {
-        answer[0]= order;
-        answer[1] =(countMap.get(order) || 0) + 1;
-        break;
-      } else if(words.findIndex(e => e === word) < index) {
-        answer[0]= order;
-        answer[1] =(countMap.get(order) || 0) + 1;
-        break;
-      }else {
-        countMap.set(order, (countMap.get(order) || 0) + 1);  
-        preWord = word;
-      }
+    if (usedWords.has(word) || (prevWord && prevWord.at(-1) !== word[0])) {
+      return [player, turn];
+    }
+
+    usedWords.add(word);
+    prevWord = word;
   }
 
-  return answer;
+  return [0, 0];
 }
