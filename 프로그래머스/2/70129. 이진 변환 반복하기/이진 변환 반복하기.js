@@ -1,13 +1,13 @@
 function solution(s) {
   	let zeroSum = 0;
-    function def(num,index) {
+    function binaryTransform(num,index) {
       if(num === "1")  {
         return [index, zeroSum];
       }
-      const onlyOne = num.replaceAll(0,'');
-      zeroSum += num.length - onlyOne.length;
-      const conversion = onlyOne.length.toString(2);
-      return def(conversion, index + 1);
+      const ones = num.replaceAll("0",'');
+      zeroSum += num.length - ones.length;
+      const next = ones.length.toString(2);
+      return binaryTransform(next, index + 1);
     }
-    return def(s, 0);
+    return binaryTransform(s, 0);
 }
