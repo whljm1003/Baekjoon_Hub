@@ -1,17 +1,14 @@
 function solution(people, limit) {
-    const peopleSort = people.sort((a,b) => a-b);
-    let count = 0;
+    people.sort((a,b) => a-b);
+    let count = 0, left = 0, right = people.length - 1;
 
-    while(peopleSort.length !== 0) {
-      const left = peopleSort[0];
-      const right = peopleSort.at(-1);
-      if(left + right <= limit) {  
-          peopleSort.shift();
-          peopleSort.pop();
-      }else {
-          peopleSort.pop();
+    while(left <= right) {
+      if(people[left] + people[right] <= limit) {  
+          left ++;
       }
+      right--;
       count++;
     }
+  
   return count;
 }
