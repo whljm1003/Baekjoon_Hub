@@ -1,39 +1,21 @@
 function solution(s) {
-  let answer = 0;
-  const arr = s.split('');
-
-  const matching = {
-    ')': '(',
-    '}': '{',
-    ']': '[',
-  };
+  let count = 0;
 
   for (let i = 0; i < s.length; i++) {
-    // 1. 회전
-    const target = arr.shift();
-    arr.push(target);
-
-    // 2. 스택 검사
-    const stack = [];
-    let isValid = true;
-
-    for (const bracket of arr) {
-      if (['(', '{', '['].includes(bracket)) {
-        stack.push(bracket);
-      } else {
-        if (stack.at(-1) === matching[bracket]) {
-          stack.pop();
-        } else {
-          isValid = false;
-          break;
-        }
-      }
-    }
-
-    if (isValid && stack.length === 0) {
-      answer++;
-    }
+    const rotated = s.slice(i) + s.slice(0, i);
+    if (isValid(rotated)) count++;
   }
 
-  return answer;
+  return count;
+}
+
+const pairs = { "(": ")", "[": "]", "{": "}" };
+
+function isValid(s) {
+  const stack = [];
+  for (const ch of s) {
+    if (pairs[ch]) stack.push(ch);
+    else if (stack.length === 0 || pairs[stack.pop()] !== ch) return false;
+  }
+  return stack.length === 0;
 }
