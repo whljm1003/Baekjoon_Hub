@@ -1,23 +1,27 @@
+const students = {
+  1 : [1, 2, 3, 4, 5, 1, 2, 3, 4, 5],
+  2 : [2, 1, 2, 3, 2, 4, 2, 5, 2, 1, 2, 3, 2, 4, 2, 5],
+  3 : [3, 3, 1, 1, 2, 2, 4, 4, 5, 5, 3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
+}
+
 function solution(answers) {
-    const answer = [0, 0, 0];
-  
-    const first = [1,2,3,4,5];
-    const second = [2,1,2,3,2,4,2,5];
-    const third = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
+    let result = []
+    const answer = [0,0,0];
+ 
   
     for(let i = 0 ; i < answers.length ; i++) {
-      if(answers[i] === first[i % first.length]) answer[0]++;
-      if(answers[i] === second[i % second.length]) answer[1]++;
-      if(answers[i] === third[i % third.length]) answer[2]++;
-    }
-    
-    const max = Math.max(...answer);
-    const result = [];
+      if(students[1][i % students[1].length] === answers[i]) answer[0] = answer[0] + 1;
+      if(students[2][i % students[2].length] === answers[i]) answer[1] = answer[1] + 1;
+      if(students[3][i % students[3].length] === answers[i]) answer[2] = answer[2] + 1;
+    }  
   
-    for(let i = 0 ; i < answer.length ; i++) { 
-      if(answer[i] === max) result.push(i + 1);
-      
-    }
+    const max = Math.max(...answer);
     
+  for( let i = 0 ; i < answer.length ; i++) {
+    if(answer[i] === max) {
+      result.push(i+1);
+    }
+  }
+  
     return result;
 }
